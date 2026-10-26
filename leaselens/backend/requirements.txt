@@ -1,0 +1,19 @@
+# LeaseLens backend dependencies (Python 3.11+)
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+pydantic>=2.8,<3.0
+pydantic-settings>=2.4,<3.0
+python-multipart>=0.0.9
+httpx>=0.27,<1.0
+
+# Document processing
+pymupdf>=1.24,<2.0
+pillow>=10.4
+pytesseract>=0.3.10
+
+# Optional Google provider (only used when AI_PROVIDER=google or chosen in the UI)
+google-genai>=1.0,<2.0
+
+# Tests
+pytest>=8.3,<9.0
+pytest-asyncio>=0.24

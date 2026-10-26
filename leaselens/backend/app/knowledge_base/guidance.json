@@ -1,0 +1,245 @@
+{
+  "_note": "General contract-review guidance written for LeaseLens. These entries are NOT laws, regulations or legal citations. Rules differ between countries, states and cities, so every entry is general guidance only.",
+  "entries": [
+    {
+      "id": "KB-AR-01",
+      "category": "auto_renewal",
+      "title": "Automatic renewal and cancellation windows",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Some agreements renew for a new term unless you cancel within a set window before the end date. Missing the window can lock you in for another full term.",
+      "warning_signs": ["renews automatically", "unless written notice is given", "notice before expiry", "same terms for a further period"],
+      "example_clause": "This agreement shall automatically renew for successive twelve month terms unless either party gives ninety days written notice before expiry.",
+      "questions": ["What is the exact last date I can cancel to avoid renewal?", "Can renewal be changed to opt-in instead of automatic?", "Will the price change when the agreement renews?"]
+    },
+    {
+      "id": "KB-AR-02",
+      "category": "auto_renewal",
+      "title": "Price changes at renewal",
+      "applies_to": ["rental", "loan", "other"],
+      "summary": "A renewal clause may allow new prices or terms to start with the new term. Check how much notice you get about changes before the renewal deadline passes.",
+      "warning_signs": ["renewal at the then current rate", "terms in effect at renewal", "renewal rent increase"],
+      "example_clause": "Upon renewal the rent shall be adjusted to the landlord's then current market rate.",
+      "questions": ["How will the renewal price be set?", "Will I be told about new terms before my cancellation deadline?"]
+    },
+    {
+      "id": "KB-SD-01",
+      "category": "security_deposit",
+      "title": "Deposit deductions should be specific",
+      "applies_to": ["rental", "other"],
+      "summary": "Clear deposit clauses say which costs can be deducted, how damage is documented, and when the remainder is returned. Vague wording gives the other side wide room to keep money.",
+      "warning_signs": ["deduct at sole discretion", "any costs incurred", "deposit is non refundable", "no timeline for return"],
+      "example_clause": "The landlord may retain all or part of the deposit for any reason at its sole discretion.",
+      "questions": ["Which specific costs can be deducted from the deposit?", "Will we do a move-in and move-out inspection together with photos?", "How many days after move-out will the deposit be returned?"]
+    },
+    {
+      "id": "KB-SD-02",
+      "category": "security_deposit",
+      "title": "Non-refundable payments",
+      "applies_to": ["rental", "loan", "other"],
+      "summary": "A payment labelled non-refundable will usually not come back, even if you leave early or the deal falls through. Make sure you understand what it pays for.",
+      "warning_signs": ["non refundable deposit", "non refundable fee", "holding fee forfeited"],
+      "example_clause": "A non-refundable cleaning deposit of 500 will be charged at signing.",
+      "questions": ["What exactly does this non-refundable payment cover?", "Is it refundable if the agreement does not start?"]
+    },
+    {
+      "id": "KB-FE-01",
+      "category": "fees",
+      "title": "Extra fees on top of the main price",
+      "applies_to": ["rental", "loan", "employment", "other"],
+      "summary": "Administrative, processing, service or amenity fees can noticeably raise the real cost. A fair contract lists each fee with an amount or a clear formula.",
+      "warning_signs": ["administrative fee", "processing charge", "service fee", "additional charges as determined"],
+      "example_clause": "Tenant shall pay a monthly amenity fee and any additional charges as determined by management.",
+      "questions": ["Can you list every fee with its amount?", "Can any fee increase during the agreement?", "What is the total monthly cost including all fees?"]
+    },
+    {
+      "id": "KB-FE-02",
+      "category": "fees",
+      "title": "Open-ended cost sharing",
+      "applies_to": ["rental", "other"],
+      "summary": "Clauses that pass on utilities, maintenance or other costs without a cap or a method of calculation make your total cost hard to predict.",
+      "warning_signs": ["share of building costs", "costs as determined", "other costs may apply"],
+      "example_clause": "Tenant shall reimburse landlord for a proportionate share of all building operating costs.",
+      "questions": ["How is my share calculated?", "Is there a cap on these costs?", "Can I see past bills?"]
+    },
+    {
+      "id": "KB-TE-01",
+      "category": "termination",
+      "title": "Balanced termination rights",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Check whether both sides can end the agreement on similar terms. One-sided rights, very short notice for the other side, or long notice for you are worth discussing.",
+      "warning_signs": ["may terminate at any time", "terminate without cause", "only the employer may terminate", "notice period differs"],
+      "example_clause": "The company may terminate this agreement at any time without notice, while the employee must give three months notice.",
+      "questions": ["Can both of us end the agreement with the same notice period?", "What reasons allow termination without notice?"]
+    },
+    {
+      "id": "KB-TE-02",
+      "category": "termination",
+      "title": "Cost of leaving early",
+      "applies_to": ["rental", "loan", "other"],
+      "summary": "Early termination may require paying the remaining rent or balance, or a fixed fee. Understand the maximum you could owe if your plans change.",
+      "warning_signs": ["liable for remaining rent", "early termination fee", "entire balance becomes payable"],
+      "example_clause": "If tenant terminates early, tenant shall pay all remaining rent for the full term.",
+      "questions": ["What is the most I would owe if I need to leave early?", "Is the amount reduced if a replacement tenant is found?", "Can a fixed early-exit fee replace the remaining-rent requirement?"]
+    },
+    {
+      "id": "KB-PE-01",
+      "category": "penalties",
+      "title": "Late charges should be predictable",
+      "applies_to": ["rental", "loan", "other"],
+      "summary": "A late charge is common, but daily percentages, compounding charges or very short grace periods can grow quickly. Look for a grace period and a maximum.",
+      "warning_signs": ["percent per day", "late fee plus interest", "no grace period", "charges accrue daily"],
+      "example_clause": "A late charge of 5% per day shall apply to any unpaid amount.",
+      "questions": ["Is there a grace period before late charges start?", "Is there a maximum late charge?", "How is the late charge calculated?"]
+    },
+    {
+      "id": "KB-PE-02",
+      "category": "penalties",
+      "title": "Fixed penalties and forfeitures",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Fixed penalty amounts or forfeiture of money already paid should be proportionate to the actual harm. Large fixed amounts deserve a closer look.",
+      "warning_signs": ["liquidated damages", "penalty of", "forfeit all amounts paid"],
+      "example_clause": "Breach of any term shall result in forfeiture of all amounts paid and a penalty equal to two months salary.",
+      "questions": ["What situations trigger this penalty?", "Can the penalty be reduced or capped?"]
+    },
+    {
+      "id": "KB-LI-01",
+      "category": "liability",
+      "title": "Indemnity and hold-harmless clauses",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "An indemnity can make you pay the other side's losses, claims or legal fees, sometimes even when you were not at fault. Check the scope and whether it is mutual.",
+      "warning_signs": ["indemnify and hold harmless", "all claims losses and expenses", "including legal fees", "regardless of fault"],
+      "example_clause": "Tenant shall indemnify and hold harmless the landlord from all claims, losses and legal fees arising from the premises.",
+      "questions": ["Is the indemnity limited to losses I actually cause?", "Is the indemnity mutual?", "Is there a cap on the amount?"]
+    },
+    {
+      "id": "KB-LI-02",
+      "category": "liability",
+      "title": "Broad exclusions of the other side's responsibility",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Clauses saying the other side is not responsible for any damage or loss can shift all risk to you. Consider whether insurance or exceptions for negligence are needed.",
+      "warning_signs": ["shall not be liable for any", "no responsibility for loss", "tenant responsible for all repairs"],
+      "example_clause": "The landlord shall not be liable for any damage to tenant's property for any reason.",
+      "questions": ["Are you responsible if damage is caused by your negligence or a building defect?", "Which repairs am I responsible for, exactly?", "Do I need my own insurance?"]
+    },
+    {
+      "id": "KB-UC-01",
+      "category": "unilateral_changes",
+      "title": "One side can change the terms",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "If one side can change prices, rules or terms without your consent, the agreement you sign may not be the agreement you end up with. Ask for notice and a right to exit.",
+      "warning_signs": ["may amend at any time", "reserves the right to change", "without prior notice", "sole discretion"],
+      "example_clause": "The company reserves the right to modify these terms at any time at its sole discretion.",
+      "questions": ["Will I get written notice before any change?", "Can I end the agreement without penalty if I do not accept a change?", "Which terms can never change during the agreement?"]
+    },
+    {
+      "id": "KB-UC-02",
+      "category": "unilateral_changes",
+      "title": "Price increases during the term",
+      "applies_to": ["rental", "loan", "employment", "other"],
+      "summary": "Clauses allowing rent, fees, interest or pay to be adjusted should explain how often, by how much, and with what notice.",
+      "warning_signs": ["rent may be increased", "fees may be revised", "salary may be adjusted"],
+      "example_clause": "Rent may be increased by the landlord during the lease term.",
+      "questions": ["How often and by how much can the amount change?", "How much notice will I receive before an increase?"]
+    },
+    {
+      "id": "KB-RR-01",
+      "category": "rights_restrictions",
+      "title": "Waiving rights",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Some contracts ask you to give up rights or claims. Depending on where you live, some waivers may not be allowed, but you should not rely on that without advice.",
+      "warning_signs": ["waives all rights", "gives up any claim", "waiver of notice"],
+      "example_clause": "Tenant waives all rights to withhold rent for any reason.",
+      "questions": ["Which rights am I giving up, exactly?", "Can this waiver be removed or narrowed?"]
+    },
+    {
+      "id": "KB-RR-02",
+      "category": "rights_restrictions",
+      "title": "Access and use restrictions",
+      "applies_to": ["rental", "other"],
+      "summary": "Entry without notice, bans on guests, or limits on subletting affect daily life. Check that access rules give reasonable notice except in emergencies.",
+      "warning_signs": ["enter at any time", "without prior notice", "no guests", "no subletting"],
+      "example_clause": "The landlord may enter the premises at any time without notice.",
+      "questions": ["How much notice will you give before entering, except in emergencies?", "Are short visits from guests allowed?"]
+    },
+    {
+      "id": "KB-UL-01",
+      "category": "unclear_language",
+      "title": "Vague or open-ended wording",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Phrases like 'including but not limited to', 'reasonable costs' or 'as deemed necessary' can be read broadly. Ask for concrete examples, amounts or limits.",
+      "warning_signs": ["including but not limited to", "from time to time", "as deemed necessary", "reasonable costs"],
+      "example_clause": "Tenant shall pay reasonable costs as deemed necessary by the landlord from time to time.",
+      "questions": ["Can you give specific examples or a maximum amount?", "Who decides what is reasonable?"]
+    },
+    {
+      "id": "KB-UL-02",
+      "category": "unclear_language",
+      "title": "Conflicting clauses",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Words like 'notwithstanding anything else' can override other promises in the same document. Check which clause wins if two clauses disagree.",
+      "warning_signs": ["notwithstanding anything", "except as otherwise provided", "in case of conflict"],
+      "example_clause": "Notwithstanding anything in this agreement, the employer may withhold any payment.",
+      "questions": ["Which clauses does this override?", "Can the overriding wording be removed or limited?"]
+    },
+    {
+      "id": "KB-NC-01",
+      "category": "non_compete",
+      "title": "Non-compete scope",
+      "applies_to": ["employment", "other"],
+      "summary": "A non-compete limits future work. Check the duration, geography and type of work it covers. Enforceability varies widely between places.",
+      "warning_signs": ["shall not compete", "shall not be employed by", "within any territory", "for a period of"],
+      "example_clause": "For two years after leaving, the employee shall not work for any competitor anywhere in the world.",
+      "questions": ["How long does the restriction last and where does it apply?", "Which companies or roles are covered?", "Is there any payment during the restricted period?"]
+    },
+    {
+      "id": "KB-NC-02",
+      "category": "non_compete",
+      "title": "Non-solicitation",
+      "applies_to": ["employment", "other"],
+      "summary": "Non-solicitation clauses limit contacting clients or colleagues. Check whether they cover people you knew before joining.",
+      "warning_signs": ["non solicitation", "shall not solicit", "shall not hire"],
+      "example_clause": "The employee shall not solicit any client of the company for three years.",
+      "questions": ["Does this cover clients I worked with before joining?", "How long does it last?"]
+    },
+    {
+      "id": "KB-IR-01",
+      "category": "interest_and_repayment",
+      "title": "Variable interest and compounding",
+      "applies_to": ["loan"],
+      "summary": "Variable rates and frequent compounding change your total cost. Ask for the total amount payable and an example with a rate increase.",
+      "warning_signs": ["variable rate", "floating rate", "compounded daily", "rate may be revised"],
+      "example_clause": "Interest shall be charged at a variable rate compounded monthly.",
+      "questions": ["What is the total amount I will pay over the full term?", "How high can the rate go?", "How often is interest compounded?"]
+    },
+    {
+      "id": "KB-IR-02",
+      "category": "interest_and_repayment",
+      "title": "Early repayment and acceleration",
+      "applies_to": ["loan"],
+      "summary": "Prepayment charges make it costly to pay early, and acceleration clauses can make the whole balance due after one missed payment. Check the triggers.",
+      "warning_signs": ["prepayment penalty", "foreclosure charge", "immediately due and payable", "acceleration"],
+      "example_clause": "Upon any default, the entire outstanding balance shall become immediately due and payable.",
+      "questions": ["What counts as a default?", "Is there a cure period before the full balance becomes due?", "What does early repayment cost?"]
+    },
+    {
+      "id": "KB-DR-01",
+      "category": "dispute_resolution",
+      "title": "Arbitration and dispute forums",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "Arbitration clauses send disputes to a private process instead of court. Check who pays the costs, where it happens, and whether small claims court is still allowed.",
+      "warning_signs": ["binding arbitration", "waive jury trial", "class action waiver"],
+      "example_clause": "All disputes shall be resolved by binding arbitration and the parties waive any right to a jury trial.",
+      "questions": ["Who pays for arbitration?", "Can small disputes still go to a local court?"]
+    },
+    {
+      "id": "KB-DR-02",
+      "category": "dispute_resolution",
+      "title": "Governing law and location",
+      "applies_to": ["rental", "employment", "loan", "other"],
+      "summary": "A clause choosing another region's law or courts can make disputes expensive to pursue. Check whether it matches where you live or work.",
+      "warning_signs": ["governed by the laws of", "exclusive jurisdiction", "courts of"],
+      "example_clause": "This agreement is governed by the laws of a different state and disputes must be heard only in its courts.",
+      "questions": ["Why is this location chosen?", "Can disputes be heard where I live?"]
+    }
+  ]
+}

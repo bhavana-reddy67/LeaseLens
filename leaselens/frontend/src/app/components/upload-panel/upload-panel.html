@@ -1,0 +1,79 @@
+<section class="card" aria-labelledby="upload-heading">
+  <h2 id="upload-heading">2. Upload your document</h2>
+
+  <div class="grid grid--2">
+    <div class="field">
+      <label for="document-category">Document type</label>
+      <select id="document-category" (change)="onCategoryChange($event)" [disabled]="busy()">
+        @for (option of categories; track option.value) {
+          <option [value]="option.value" [selected]="option.value === category()">{{ option.label }}</option>
+        }
+      </select>
+      <span class="field__hint">Used to pick relevant guidance and prompts.</span>
+    </div>
+  </div>
+
+  <div
+    class="dropzone"
+    [class.dropzone--active]="dragOver()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+  >
+    <p><strong>Drag and drop</strong> a contract here, or</p>
+    <button class="btn btn--secondary" type="button" (click)="openPicker()" [disabled]="busy()">
+      {{ file() ? 'Replace file' : 'Choose a file' }}
+    </button>
+    <input
+      #fileInput
+      class="visually-hidden"
+      type="file"
+      accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+      aria-label="Contract file"
+      tabindex="-1"
+      (change)="onPick($event)"
+    />
+    <p class="field__hint">PDF, JPG, JPEG or PNG · up to {{ maxMb() }} MB · scanned pages need OCR</p>
+  </div>
+
+  @if (validationError(); as problem) {
+    <div class="alert alert--error" role="alert"><p>{{ problem }}</p></div>
+  }
+
+  @if (file(); as current) {
+    <div class="file-info">
+      <dl class="file-info__details">
+        <div><dt>File</dt><dd>{{ current.name }}</dd></div>
+        <div><dt>Size</dt><dd>{{ formatBytes(current.size) }}</dd></div>
+        <div><dt>Type</dt><dd>{{ current.type || 'unknown' }}</dd></div>
+        <div>
+          <dt>Status</dt>
+          <dd aria-live="polite">
+            @if (busy()) {
+              <span class="spinner" aria-hidden="true"></span> Extracting text…
+            } @else if (extracted()) {
+              Text extracted
+            } @else {
+              Ready to extract
+            }
+          </dd>
+        </div>
+      </dl>
+      <div class="button-row">
+        <button class="btn btn--primary" type="button" (click)="startExtraction()" [disabled]="busy()">
+          {{ extracted() ? 'Extract again' : 'Extract text' }}
+        </button>
+        <button class="btn btn--ghost" type="button" (click)="remove()" [disabled]="busy()">Remove file</button>
+      </div>
+    </div>
+  }
+
+  @if (serverError(); as message) {
+    <div class="alert alert--error" role="alert">
+      <p>{{ message }}</p>
+      @if (file()) {
+        <button class="btn btn--secondary btn--small" type="button" (click)="startExtraction()">Retry</button>
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,24 @@
+<section class="card card--muted" aria-labelledby="audit-heading">
+  <details>
+    <summary><h2 id="audit-heading" class="inline-heading">Analysis timeline</h2></summary>
+    <p class="field__hint">
+      What LeaseLens did, step by step. The timeline lists counts and source ids only. It does not store your
+      document text, and it disappears when you start over or close the page.
+    </p>
+    <ol class="timeline">
+      @for (event of events(); track $index) {
+        <li class="timeline__item">
+          <div class="timeline__head">
+            <strong>{{ stageLabel(event.stage) }}</strong>
+            <span [class]="badgeClass(event.status)">{{ event.status }}</span>
+            <time class="muted" [attr.datetime]="event.timestamp">{{ event.timestamp | date: 'mediumTime' }}</time>
+          </div>
+          <p>{{ event.detail }}</p>
+          @if (event.sources.length) {
+            <p class="field__hint">Sources: {{ event.sources.join(', ') }}</p>
+          }
+        </li>
+      }
+    </ol>
+  </details>
+</section>

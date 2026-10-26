@@ -1,0 +1,65 @@
+{
+  "_note": "Clause categories LeaseLens looks for. Add a new object to support a new category; add matching rules in risk_rules.json and guidance in guidance.json.",
+  "categories": [
+    {
+      "id": "auto_renewal",
+      "label": "Automatic renewal",
+      "description": "The agreement continues for a new term unless someone cancels in time."
+    },
+    {
+      "id": "security_deposit",
+      "label": "Security deposit and deductions",
+      "description": "Money held up front and the rules for keeping or deducting from it."
+    },
+    {
+      "id": "fees",
+      "label": "Hidden or additional fees",
+      "description": "Charges on top of the main rent, salary deduction, or loan payment."
+    },
+    {
+      "id": "termination",
+      "label": "Termination and notice",
+      "description": "How and when either side can end the agreement, and what it costs."
+    },
+    {
+      "id": "penalties",
+      "label": "Penalties and late charges",
+      "description": "Charges for paying late, breaking a rule, or leaving early."
+    },
+    {
+      "id": "liability",
+      "label": "Liability and indemnification",
+      "description": "Who pays when something goes wrong, including covering the other side's losses."
+    },
+    {
+      "id": "unilateral_changes",
+      "label": "One-sided changes to terms",
+      "description": "One party can change prices or terms without the other party agreeing."
+    },
+    {
+      "id": "rights_restrictions",
+      "label": "Restrictions on your rights",
+      "description": "Limits on what you can do, waivers of rights, or access to your home or property."
+    },
+    {
+      "id": "unclear_language",
+      "label": "Unclear or contradictory language",
+      "description": "Vague, open-ended or conflicting wording that could be read in more than one way."
+    },
+    {
+      "id": "non_compete",
+      "label": "Non-compete and non-solicitation",
+      "description": "Limits on where you can work or whom you can contact after the agreement ends."
+    },
+    {
+      "id": "interest_and_repayment",
+      "label": "Interest and repayment terms",
+      "description": "How interest is charged, changed, and what happens with early or missed payments."
+    },
+    {
+      "id": "dispute_resolution",
+      "label": "Disputes and governing law",
+      "description": "Where and how disagreements are decided, such as arbitration or a specific court."
+    }
+  ]
+}

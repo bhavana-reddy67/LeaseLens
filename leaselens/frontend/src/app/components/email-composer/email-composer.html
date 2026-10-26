@@ -1,0 +1,91 @@
+<section class="card" aria-labelledby="email-heading">
+  <h2 id="email-heading">5. Draft a negotiation email</h2>
+  <p class="muted">
+    Tick "Include in negotiation email" on the findings you want to raise. LeaseLens drafts the email; you edit,
+    copy and send it yourself. Nothing is sent automatically.
+  </p>
+
+  @if (findings().length) {
+    <h3>Selected findings ({{ findings().length }})</h3>
+    <ul class="selected-findings">
+      @for (finding of findings(); track finding.id) {
+        <li>
+          <span [class]="'badge badge--' + finding.risk_level">{{ riskLabels[finding.risk_level] }}</span>
+          {{ finding.category_label }}{{ finding.page ? ' (page ' + finding.page + ')' : '' }}
+        </li>
+      }
+    </ul>
+
+    <div class="grid grid--2">
+      <div class="field">
+        <label for="recipient-role">Recipient role</label>
+        <input id="recipient-role" type="text" maxlength="60" placeholder="e.g. landlord, recruiter, loan officer"
+               [value]="recipientRole()" (input)="recipientRole.set(text($event))" />
+      </div>
+      <div class="field">
+        <label for="recipient-name">Recipient name <span class="muted">(optional)</span></label>
+        <input id="recipient-name" type="text" maxlength="80" [value]="recipientName()"
+               (input)="recipientName.set(text($event))" />
+      </div>
+      <div class="field">
+        <label for="sender-name">Your name <span class="muted">(optional)</span></label>
+        <input id="sender-name" type="text" maxlength="80" [value]="senderName()"
+               (input)="senderName.set(text($event))" />
+      </div>
+      <div class="field">
+        <label for="email-tone">Tone</label>
+        <select id="email-tone" (change)="setTone($event)">
+          @for (option of tones; track option.value) {
+            <option [value]="option.value" [selected]="tone() === option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn--primary" type="button" (click)="generate()" [disabled]="generating() || !providerReady()">
+        @if (generating()) {
+          <span class="spinner" aria-hidden="true"></span> Drafting…
+        } @else {
+          {{ hasDraft() ? 'Regenerate draft' : 'Generate email draft' }}
+        }
+      </button>
+      @if (!providerReady()) {
+        <span class="field__hint">The selected AI provider is not ready. Check step 1.</span>
+      }
+    </div>
+  } @else {
+    <div class="alert alert--info"><p>No findings selected yet.</p></div>
+  }
+
+  <div aria-live="polite">
+    @if (error(); as message) {
+      <div class="alert alert--error" role="alert">
+        <p>{{ message }}</p>
+        <button class="btn btn--secondary btn--small" type="button" (click)="generate()">Retry</button>
+      </div>
+    }
+  </div>
+
+  @if (hasDraft()) {
+    <div class="email-draft">
+      @for (warning of warnings(); track warning) {
+        <div class="alert alert--warning"><p>{{ warning }}</p></div>
+      }
+      <div class="field">
+        <label for="email-subject">Subject</label>
+        <input id="email-subject" type="text" [value]="subject()" (input)="subject.set(text($event))" />
+      </div>
+      <div class="field">
+        <label for="email-body">Email</label>
+        <textarea id="email-body" rows="14" [value]="body()" (input)="body.set(text($event))"></textarea>
+      </div>
+      <div class="button-row">
+        <button class="btn btn--secondary" type="button" (click)="copy()">Copy email</button>
+        @if (copyMessage(); as message) {
+          <span class="field__hint" role="status">{{ message }}</span>
+        }
+      </div>
+    </div>
+  }
+</section>

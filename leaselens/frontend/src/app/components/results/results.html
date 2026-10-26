@@ -1,0 +1,154 @@
+<section class="card" aria-labelledby="results-heading">
+  <div class="section-head">
+    <h2 id="results-heading" tabindex="-1">4. Findings</h2>
+    <button class="btn btn--secondary btn--small" type="button" (click)="copyReport.emit(filtered())">
+      Copy report
+    </button>
+  </div>
+  @if (copyMessage(); as message) {
+    <p class="field__hint" role="status">{{ message }}</p>
+  }
+
+  <div class="summary">
+    <p class="summary__headline">
+      @if (result().summary.overall; as overall) {
+        <span [class]="'badge badge--' + overall">Highest: {{ riskLabels[overall] }}</span>
+      }
+      {{ result().summary.headline }}
+    </p>
+    <div class="stat-grid">
+      @for (level of riskLevels; track level) {
+        <div class="stat" [attr.data-risk]="level">
+          <span class="stat__value">{{ result().summary.counts[level] }}</span>
+          <span class="stat__label">{{ riskLabels[level] }}</span>
+        </div>
+      }
+    </div>
+    <p class="field__hint">
+      Analysed with {{ result().provider === 'ollama' ? 'local Ollama' : 'Google Gemini API' }}
+      (<code>{{ result().model }}</code>){{ result().processed_locally ? ', on this computer' : ', in the cloud' }}.
+      Risk levels combine transparent keyword rules with the AI's reading; "evidence agreement" shows how well
+      they agree, not legal certainty.
+    </p>
+  </div>
+
+  @for (warning of result().warnings; track warning) {
+    <div class="alert alert--warning"><p>{{ warning }}</p></div>
+  }
+
+  @if (result().findings.length) {
+    <div class="filters" role="group" aria-label="Filter findings">
+      <div class="field">
+        <label for="risk-filter">Risk level</label>
+        <select id="risk-filter" (change)="onRiskFilter($event)">
+          <option value="all" [selected]="riskFilter() === 'all'">All levels</option>
+          @for (level of riskLevels; track level) {
+            <option [value]="level" [selected]="riskFilter() === level">{{ riskLabels[level] }}</option>
+          }
+        </select>
+      </div>
+      <div class="field">
+        <label for="category-filter">Clause category</label>
+        <select id="category-filter" (change)="onCategoryFilter($event)">
+          <option value="all" [selected]="categoryFilter() === 'all'">All categories</option>
+          @for (category of categories(); track category.id) {
+            <option [value]="category.id" [selected]="categoryFilter() === category.id">{{ category.label }}</option>
+          }
+        </select>
+      </div>
+      <p class="filters__count muted" aria-live="polite">
+        Showing {{ filtered().length }} of {{ result().findings.length }}
+      </p>
+    </div>
+  }
+
+  <div class="finding-list">
+    @for (finding of filtered(); track finding.id) {
+      <article class="finding" [attr.data-risk]="finding.risk_level" [attr.aria-labelledby]="'finding-' + finding.id">
+        <header class="finding__header">
+          <span [class]="'badge badge--' + finding.risk_level">{{ riskLabels[finding.risk_level] }}</span>
+          <h3 [id]="'finding-' + finding.id">{{ finding.category_label }}</h3>
+          <span class="muted">{{ finding.page ? 'Page ' + finding.page : 'Location unknown' }}</span>
+        </header>
+
+        <blockquote class="excerpt">{{ finding.excerpt }}</blockquote>
+
+        <dl class="finding__facts">
+          <dt>Why this level</dt>
+          <dd>{{ finding.reason }}</dd>
+          <dt>Possible impact</dt>
+          <dd>{{ finding.impact }}</dd>
+        </dl>
+
+        @if (finding.questions.length) {
+          <h4>Questions to ask before signing</h4>
+          <ul>
+            @for (question of finding.questions; track question) {
+              <li>{{ question }}</li>
+            }
+          </ul>
+        }
+
+        @if (finding.uncertainty_notes.length) {
+          <div class="alert alert--info finding__notes">
+            @for (note of finding.uncertainty_notes; track note) {
+              <p>{{ note }}</p>
+            }
+          </div>
+        }
+
+        <details class="evidence">
+          <summary>Evidence and sources</summary>
+          <dl class="finding__facts">
+            <dt>Assessed by</dt>
+            <dd>{{ assessedByText(finding) }}</dd>
+            <dt>Evidence agreement</dt>
+            <dd>{{ agreementLabels[finding.evidence_agreement] }} ({{ finding.evidence_agreement }})</dd>
+            <dt>Keyword rules</dt>
+            <dd>
+              @if (finding.rule_hits.length) {
+                <ul>
+                  @for (hit of finding.rule_hits; track hit.rule_id) {
+                    <li><code>{{ hit.rule_id }}</code> ({{ hit.level }}): {{ hit.description }}</li>
+                  }
+                </ul>
+              } @else {
+                No keyword rule matched.
+              }
+            </dd>
+            <dt>AI level</dt>
+            <dd>{{ finding.ai_level ? riskLabels[finding.ai_level] : 'Not assessed by the AI' }}</dd>
+            <dt>General guidance (not law)</dt>
+            <dd>
+              @if (finding.references.length) {
+                <ul>
+                  @for (ref of finding.references; track ref.source_id) {
+                    <li><code>{{ ref.source_id }}</code> {{ ref.title }}. <span class="muted">{{ ref.relevance }}</span></li>
+                  }
+                </ul>
+              } @else {
+                No matching guidance in the local knowledge base.
+              }
+            </dd>
+          </dl>
+        </details>
+
+        <label class="checkbox finding__select">
+          <input type="checkbox" [checked]="isSelected(finding.id)" (change)="toggle(finding.id, $event)" />
+          Include in negotiation email
+        </label>
+      </article>
+    } @empty {
+      @if (result().findings.length) {
+        <p class="muted">
+          No findings match these filters.
+          <button class="btn btn--ghost btn--small" type="button" (click)="clearFilters()">Clear filters</button>
+        </p>
+      } @else {
+        <div class="alert alert--info"><p>{{ result().summary.headline }}</p></div>
+      }
+    }
+  </div>
+
+  <p class="field__hint disclaimer">{{ result().disclaimer }}</p>
+</section>

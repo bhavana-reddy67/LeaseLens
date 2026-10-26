@@ -1,0 +1,72 @@
+<section class="card" aria-labelledby="provider-heading">
+  <div class="section-head">
+    <h2 id="provider-heading">1. Choose where the AI runs</h2>
+    <button class="btn btn--ghost btn--small" type="button" (click)="refresh.emit()" [disabled]="loading()">
+      Refresh status
+    </button>
+  </div>
+
+  @if (loading()) {
+    <p role="status"><span class="spinner" aria-hidden="true"></span> Checking AI providers…</p>
+  }
+
+  @if (error(); as message) {
+    <div class="alert alert--error" role="alert">
+      <p>{{ message }}</p>
+      <button class="btn btn--secondary btn--small" type="button" (click)="refresh.emit()">Try again</button>
+    </div>
+  }
+
+  @if (info(); as data) {
+    <fieldset class="provider-options" [disabled]="disabled()">
+      <legend class="visually-hidden">AI provider</legend>
+      @for (provider of data.providers; track provider.name) {
+        <label class="provider-option" [class.provider-option--selected]="selected() === provider.name">
+          <input
+            type="radio"
+            name="provider"
+            [value]="provider.name"
+            [checked]="selected() === provider.name"
+            (change)="select(provider.name)"
+          />
+          <span class="provider-option__body">
+            <span class="provider-option__title">
+              {{ provider.label }}
+              <span class="badge" [class]="provider.available ? 'badge badge--low' : 'badge badge--uncertain'">
+                {{ statusLabel(provider) }}
+              </span>
+            </span>
+            <span class="muted">
+              Model <code>{{ provider.model }}</code> ·
+              {{ provider.local ? 'Runs on this computer' : 'Cloud service' }}
+            </span>
+            <span class="field__hint">{{ provider.detail }}</span>
+          </span>
+        </label>
+      }
+    </fieldset>
+
+    @if (selectedStatus(); as status) {
+      @if (status.local) {
+        <div class="alert alert--success privacy-note" role="status">
+          <p>
+            <strong>Privacy:</strong> documents are processed on this computer by {{ status.label }}
+            (<code>{{ status.model }}</code>). No document text is sent to a cloud AI service.
+          </p>
+        </div>
+      } @else {
+        <div class="alert alert--warning privacy-note">
+          <p>
+            <strong>Privacy:</strong> {{ status.label }} mode sends the extracted document text, and later the
+            findings you choose for an email, to Google's servers. Google's own terms decide how that data is
+            handled; LeaseLens cannot guarantee how long it is kept.
+          </p>
+          <label class="checkbox">
+            <input type="checkbox" [checked]="cloudConsent()" (change)="onConsentChange($event)" />
+            I understand, and I want to send this document's text to Google for analysis.
+          </label>
+        </div>
+      }
+    }
+  }
+</section>

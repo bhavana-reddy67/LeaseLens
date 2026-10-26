@@ -1,0 +1,48 @@
+<section class="card" aria-labelledby="review-heading">
+  <h2 id="review-heading">3. Check the extracted text</h2>
+  <p class="muted">
+    {{ extraction().file_name }} · {{ extraction().page_count }} page(s) · {{ editedChars() | number }} characters ·
+    read with
+    @for (method of extraction().methods_used; track method; let last = $last) {
+      {{ methodLabels[method] }}{{ last ? '' : ', ' }}
+    }
+  </p>
+  <p class="field__hint">
+    Fix obvious reading mistakes before analysis (common with scans). Only this text is analysed.
+    {{ extraction().retention_note }}
+  </p>
+
+  @for (warning of extraction().warnings; track warning) {
+    <div class="alert alert--warning"><p>{{ warning }}</p></div>
+  }
+
+  <div class="page-list">
+    @for (page of pages(); track page.page; let first = $first) {
+      <details class="page-text" [open]="first">
+        <summary>
+          Page {{ page.page }}
+          <span class="badge badge--neutral">{{ methodLabels[page.method] }}</span>
+          <span class="muted">{{ page.text.trim().length | number }} characters</span>
+        </summary>
+        <label class="visually-hidden" [for]="'page-text-' + page.page">Text of page {{ page.page }}</label>
+        <textarea
+          [id]="'page-text-' + page.page"
+          rows="10"
+          spellcheck="false"
+          [value]="page.text"
+          [disabled]="disabled()"
+          (change)="onEdit(page.page, $event)"
+        ></textarea>
+      </details>
+    }
+  </div>
+
+  @if (isEdited()) {
+    <p class="field__hint">
+      You edited the text.
+      <button class="btn btn--ghost btn--small" type="button" (click)="resetEdits.emit()" [disabled]="disabled()">
+        Undo my edits
+      </button>
+    </p>
+  }
+</section>

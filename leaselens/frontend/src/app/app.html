@@ -1,0 +1,132 @@
+<!-- Page structure follows brand/template.html -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand-mark" href="/">
+      <span class="brand-mark__logo" aria-hidden="true">LL</span>
+      <span class="brand-mark__name">LeaseLens</span>
+    </a>
+    <p class="site-header__tagline">Understand a contract before you sign it</p>
+  </div>
+</header>
+
+<main class="site-main">
+  <div class="container stack">
+    <section class="card intro" aria-labelledby="page-title">
+      <h1 id="page-title">Spot risky clauses before you sign</h1>
+      <p>
+        LeaseLens reads rental agreements, employment contracts, loan agreements and other contracts, highlights
+        clauses worth a closer look, explains why, and helps you ask the right questions.
+      </p>
+      <ol class="how-it-works">
+        <li><strong>Choose the AI.</strong> Local Gemma through Ollama by default, so documents stay on this computer.</li>
+        <li><strong>Upload</strong> a PDF or photo. LeaseLens extracts the text, and you check it.</li>
+        <li><strong>Review findings.</strong> Keyword rules and the AI each assess clauses, with sources shown.</li>
+        <li><strong>Draft an email</strong> about the findings you choose. You edit and send it yourself.</li>
+      </ol>
+      <p class="field__hint">Informational only. LeaseLens is not a lawyer and does not give legal advice.</p>
+    </section>
+
+    <app-provider-panel
+      [info]="providers()"
+      [loading]="providersLoading()"
+      [error]="providersError()"
+      [disabled]="analyzing() || extracting()"
+      [(selected)]="provider"
+      [(cloudConsent)]="cloudConsent"
+      (refresh)="loadProviders()"
+    />
+
+    <app-upload-panel
+      [maxMb]="maxUploadMb()"
+      [busy]="extracting()"
+      [extracted]="extraction() !== null"
+      [serverError]="extractError()"
+      [(category)]="category"
+      [(file)]="file"
+      (extract)="extract($event)"
+      (cleared)="onFileCleared()"
+    />
+
+    @if (extraction(); as extracted) {
+      <app-text-review
+        [extraction]="extracted"
+        [pages]="pages()"
+        [disabled]="analyzing()"
+        (pageEdited)="onPageEdited($event)"
+        (resetEdits)="resetEdits()"
+      />
+
+      <section class="card" aria-labelledby="analyze-heading">
+        <h2 id="analyze-heading">Run the analysis</h2>
+        @if (selectedProvider(); as status) {
+          <p>
+            Document type: <strong>{{ categoryLabel() }}</strong>. Processing with
+            <strong>{{ status.label }}</strong> (<code>{{ status.model }}</code>),
+            {{ status.local ? 'on this computer.' : 'which sends the text to Google.' }}
+          </p>
+        }
+        <div class="button-row">
+          <button class="btn btn--primary" type="button" (click)="analyze()" [disabled]="!canAnalyze()">
+            {{ analysis() ? 'Analyse again' : 'Analyse contract' }}
+          </button>
+          @if (analyzing()) {
+            <button class="btn btn--ghost" type="button" (click)="cancelAnalysis()">Cancel</button>
+          }
+        </div>
+        @if (!analyzing() && analyzeBlockedReason(); as reason) {
+          <p class="field__hint">{{ reason }}</p>
+        }
+        <div aria-live="polite">
+          @if (analyzing()) {
+            <p class="progress-note" role="status">
+              <span class="spinner" aria-hidden="true"></span>
+              Analysing… {{ elapsedSeconds() }}s elapsed. Local models can take a few minutes for long documents.
+            </p>
+          }
+        </div>
+        @if (analyzeError(); as message) {
+          <div class="alert alert--error" role="alert">
+            <p>{{ message }}</p>
+            <button class="btn btn--secondary btn--small" type="button" (click)="analyze()" [disabled]="!canAnalyze()">
+              Retry analysis
+            </button>
+          </div>
+        }
+      </section>
+    }
+
+    @if (analysis(); as result) {
+      <app-results
+        [result]="result"
+        [(selectedIds)]="selectedFindingIds"
+        [copyMessage]="reportCopyMessage()"
+        (copyReport)="copyReport($event)"
+      />
+
+      <app-email-composer
+        [findings]="selectedFindings()"
+        [documentCategory]="result.category"
+        [provider]="provider()"
+        [cloudConsent]="cloudConsent()"
+        [providerReady]="providerReady()"
+      />
+
+      <app-audit-timeline [events]="result.audit" />
+
+      <div class="button-row">
+        <button class="btn btn--secondary" type="button" (click)="startOver()">
+          Start over and clear this document
+        </button>
+      </div>
+    }
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      LeaseLens is an informational tool, not a lawyer. It can miss or misjudge clauses and does not decide whether
+      a term is legal, enforceable or safe. For important decisions, ask a qualified legal professional.
+    </p>
+  </div>
+</footer>

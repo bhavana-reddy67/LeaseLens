@@ -1,0 +1,28 @@
+# Secrets
+.env
+backend/.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Angular
+node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/out-tsc/
+
+# Temporary uploads (if TEMP_DIR points inside the project)
+uploads/
+tmp/
+leaselens-uploads/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
